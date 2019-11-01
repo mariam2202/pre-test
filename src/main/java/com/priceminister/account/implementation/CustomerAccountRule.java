@@ -14,7 +14,7 @@
  */
 package com.priceminister.account.implementation;
 
-import com.priceminister.account.*;
+        import com.priceminister.account.*;
 
 
 public class CustomerAccountRule implements AccountRule {
@@ -23,7 +23,7 @@ public class CustomerAccountRule implements AccountRule {
      * @see com.priceminister.account.AccountRule#withdrawPermitted(java.lang.Double)
      */
     public boolean withdrawPermitted(Double resultingAccountBalance) {
-        return resultingAccountBalance >= 0;
+        return Double.compare(resultingAccountBalance, Double.valueOf(0.0)) >= 0;
     }
 
 }
