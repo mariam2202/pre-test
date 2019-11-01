@@ -34,7 +34,7 @@ public class CustomerAccountTest {
      * Tests that an empty account always has a balance of 0.0, not a NULL.
      */
     @Test
-    public void testAccountWithoutMoneyHasZeroBalance() {
+    public void testAccountWithoutMoneyHasZeroBalance() throws IllegalBalanceException {
         // Given
 
         // When
@@ -49,7 +49,7 @@ public class CustomerAccountTest {
      * Adds money to the account and checks that the new balance is as expected.
      */
     @Test
-    public void testAddPositiveAmount() {
+    public void testAddPositiveAmount() throws IllegalBalanceException {
         // Given
         customerAccount.add(100D);
 
@@ -65,7 +65,7 @@ public class CustomerAccountTest {
      * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
      */
     @Test
-    public void testWithdrawAndReportBalanceIllegalBalance() {
+    public void testWithdrawAndReportBalanceIllegalBalance() throws IllegalBalanceException {
         // Given
         rule = new CustomerAccountRule();
         customerAccount.add(25D);
@@ -94,6 +94,21 @@ public class CustomerAccountTest {
 
         // Then
         Assert.assertEquals(20D, total, 0.001d);
+    }
+
+    @Test
+    public void testAddNegativeAmount() throws IllegalBalanceException {
+        // Given
+        customerAccount.add(50D);
+
+        try {
+            // When
+            customerAccount.add(-100D);
+            Assert.fail("The add shouln't decrease");
+        } catch (IllegalBalanceException e) {
+            // Then
+            Assert.assertEquals(50D, customerAccount.getBalance(), 0.001d);
+        }
     }
 
     // Also implement missing unit tests for the above functionalities.

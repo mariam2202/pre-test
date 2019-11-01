@@ -7,7 +7,10 @@ public class CustomerAccount implements Account {
 
     private Double balance = 0D;
 
-    public void add(Double addedAmount) {
+    public void add(Double addedAmount) throws IllegalBalanceException {
+        if (!DoubleUtil.isPositive(addedAmount)) {
+            throw new IllegalBalanceException(addedAmount);
+        }
         balance += addedAmount;
     }
 

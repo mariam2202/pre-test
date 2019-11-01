@@ -23,7 +23,7 @@ public class CustomerAccountRule implements AccountRule {
      * @see com.priceminister.account.AccountRule#withdrawPermitted(java.lang.Double)
      */
     public boolean withdrawPermitted(Double resultingAccountBalance) {
-        return Double.compare(resultingAccountBalance, Double.valueOf(0.0)) >= 0;
+        return DoubleUtil.isPositive(resultingAccountBalance);
     }
 
 }
