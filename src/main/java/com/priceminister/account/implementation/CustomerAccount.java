@@ -24,6 +24,7 @@ public class CustomerAccount implements Account {
             throw new IllegalBalanceException(null);
         }
         Double newBalance = balance - withdrawnAmount;
+        //test
         if (!rule.withdrawPermitted(newBalance)) {
             throw new IllegalBalanceException(newBalance);
         }
